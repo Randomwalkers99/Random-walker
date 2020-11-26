@@ -20,8 +20,8 @@ murgauche = -5
 xmaxlife = 1
 # creation d'une matrice de zeros qui deviendront bientot des heros (oui je sais c'est nul mais je suis fatiguee ok ?)
 stock =np.zeros((nbonhomme,N+1))
-stockr =np.zeros((nbonhomme,N+1))
-stocka =np.zeros((nbonhomme,N+1))
+stockr =np.zeros((nbonhomme,N))
+stocka =np.zeros((nbonhomme,N))
 
 
 #np.random.normal prend une valeur dans une fonction normale centree (je crois hein pas sure du tout les cours de terminale remonte a looooooiiiiin)
