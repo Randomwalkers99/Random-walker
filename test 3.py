@@ -54,7 +54,7 @@ def reflectabsord(N,xn,xmaxlife):
         xn,xmaxlife = absorbing(xn, murdroite, murgauche,xmaxlife)
     return(xn,xmaxlife)
 
-
+listpersonneviepas=[0]*N
 for i in range(nbonhomme) :
     #il faut remettre a 0 la liste a chaque fois pour que chaque bonhomme commence a 0 pareil pour xmaxlife si le bonhomme est direct mort c'est un peu couillon quand meme
     x = [0]
@@ -64,6 +64,10 @@ for i in range(nbonhomme) :
     for z in range(N):
         dx=np.random.normal()
         xn = x[-1]+ dx
+
+        if xmaxlife!=0:
+            listpersonneviepas[z]+=1
+            print(listpersonneviepas)
 
         if p==1 :
             #si on ne fait pas xmaxlife different de 0 alors la personne risque de continuer a bouger alors qu'elle est censee etre absorbee
@@ -80,6 +84,7 @@ for i in range(nbonhomme) :
     #ajout de la liste des pas finies du bonhomme z dans la matrice
     stock[i,:] = x
 
+print(listpersonneviepas)
 plt.subplot(211)
 
 dureedevietot=0
@@ -98,7 +103,9 @@ for numerobonhomme in range(nbonhomme) :
         plt.title("déplacement du bonhomme")
 
 
-    dureedevietot +=len(bonvivant)
+
+
+
 
 moydureedevie=(dureedevietot/N)
 print(moydureedevie)
@@ -107,16 +114,11 @@ print(moydureedevie)
 plt.show
 
 #question 1
-som=0
-moycoordpas=[]
-plt.subplot(212)
-for pas in range(N):
-    som=0
-    for numerobonhomme in range(nbonhomme) :
-        som+=stock[numerobonhomme][pas]
-    moycoordpas.append(som/(nbonhomme))
 
-plt.plot(moycoordpas,'ob')
+plt.subplot(212)
+
+b=stock.mean(axis=0)
+plt.plot(b,'ob')
 
 #vision en fonction des pas
 
