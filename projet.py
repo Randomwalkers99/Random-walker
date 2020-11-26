@@ -20,8 +20,8 @@ murgauche = -5
 xmaxlife = 1
 # creation d'une matrice de zeros qui deviendront bientot des heros (oui je sais c'est nul mais je suis fatiguee ok ?)
 stock =np.zeros((nbonhomme,N+1))
-stockr =np.zeros((nbonhomme,N))
-stocka =np.zeros((nbonhomme,N))
+stockr =np.zeros((nbonhomme,N+1))
+stocka =np.zeros((nbonhomme,N+1))
 
 
 #np.random.normal prend une valeur dans une fonction normale centree (je crois hein pas sure du tout les cours de terminale remonte a looooooiiiiin)
@@ -61,16 +61,16 @@ def reflectabsord(N,xn,xmaxlife):
 for i in range(nbonhomme) :
 	x = [0]
 	xmaxlife=1
-	listreflect=[]
-	listabsorb=[]
+	listreflect=[0]
+	listabsorb=[0]
 	for pas in range(N):
 		dx=np.random.normal()
-		xn = x[-1]+ dx
+		xn = listabsorb[-1]+ dx
 		xn,xmaxlife=absorbing(xn, murdroite, murgauche,xmaxlife)
 		listabsorb.append(xn)
-	for pas in range(N):
+
 		dx=np.random.normal()
-		xn = x[-1]+ dx
+		xn = listreflect[-1]+ dx
 		xn=reflect(xn,murdroite,murgauche)
 		listreflect.append(xn)
 
@@ -79,59 +79,12 @@ for i in range(nbonhomme) :
 	stockr[i,:] = listreflect
 
 a=stocka.mean(axis=0)
-r=stockb.mean(axis=0)
+r=stockr.mean(axis=0)
 
 plt.plot(a,'g--')
-plt.plot(r,'b^')
+plt.plot(r,'b--')
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-plt.plot(211)
-dureedevietot=0
-for numerobonhomme in range(nbonhomme) :
-    a=stocka[numerobonhomme]
-    #creation d'une liste vide ou on va rentrer les pas qu'il a fait en etant vivant
-    bonvivant=[]
-    for pas in range(len(x)):
-        if numerobonhomme%2==0:
-            plt.plot(x[pas],numerobonhomme,'ob')
-        else:
-            plt.plot(x[pas],numerobonhomme,'or')
-        plt.title("déplacement du bonhomme")
-
-
-    dureedevietot +=len(bonvivant)
-
-moydureedevie=(dureedevietot/N)
-print(moydureedevie)
-
-
-plt.show
-
-#question 1
-som=0
-moycoordpas=[]
-plt.subplot(212)
-for pas in range(N):
-    som=0
-    for numerobonhomme in range(nbonhomme) :
-        som+=stock[numerobonhomme][pas]
-    moycoordpas.append(som/(nbonhomme))
-
-plt.plot(moycoordpas,'ob')
-
-#vision en fonction des pas
 
 plt.show()
 #>>>>>>> 52cfbbd8a21549b075332ba65b11eeb6d036c273
