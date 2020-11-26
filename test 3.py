@@ -53,7 +53,7 @@ def reflectabsord(N,xn,xmaxlife):
     if 0.5 > p :
         xn,xmaxlife = absorbing(xn, murdroite, murgauche,xmaxlife)
     return(xn,xmaxlife)
-
+X=[]
 listpersonneviepas=[0]*N
 for i in range(nbonhomme) :
     #il faut remettre a 0 la liste a chaque fois pour que chaque bonhomme commence a 0 pareil pour xmaxlife si le bonhomme est direct mort c'est un peu couillon quand meme
@@ -81,9 +81,16 @@ for i in range(nbonhomme) :
             xn=reflect(xn,murdroite,murgauche)
         #ajout a la liste x comprenant les coordonees des pas du bonhomme z
         x.append(xn)
+    
     #ajout de la liste des pas finies du bonhomme z dans la matrice
     stock[i,:] = x
-
+    for numpas in range(len(x)):
+            X[numpas].append(x[numpas])
+variancepas=[]
+for g in range(len(x))
+    variancepas[g]=np.std(X[g])
+plt.plot(variancepas)
+      
 print(listpersonneviepas)
 plt.subplot(211)
 
