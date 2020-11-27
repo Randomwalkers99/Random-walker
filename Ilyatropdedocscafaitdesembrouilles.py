@@ -81,6 +81,7 @@ for i in range(nbonhomme) :
             xn,xmaxlife=absorbing(xn, murdroite, murgauche,xmaxlife)
         x.append(xn)
 
+
         dx=np.random.normal()
         xn = listabsorb[-1]+ dx
         xn,xmaxlife=absorbing(xn, murdroite, murgauche,xmaxlife)
@@ -98,7 +99,11 @@ for i in range(nbonhomme) :
     stockr[i,:]=listreflect
 
 
-
+for i in range(nbonhomme) :
+    plt.plot(stock[i], 'o')
+plt.xlabel('Number of steps')
+plt.ylabel('Position')
+plt.show()
 
 plt.subplot(211)
 
@@ -147,3 +152,4 @@ plt.figure(2)
 plt.plot(listpersonneviepas,'^k:')
 plt.show()
 #>>>>>>> 52cfbbd8a21549b075332ba65b11eeb6d036c273
+
