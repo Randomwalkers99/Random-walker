@@ -102,6 +102,9 @@ for i in range(nbonhomme) :
     stock[i,:] = x
     stocka[i,:]=listabsorb
     stockr[i,:]=listreflect
+    for bidule in range(0,len(x)):
+        X[bidule][numbon]=(x[bidule])
+    numbon+=1
 
 
 
@@ -115,22 +118,6 @@ plt.show()
 
 plt.figure(2)
 plt.subplot(211)
-
-dureedevietot=0
-for numerobonhomme in range(nbonhomme) :
-    x=stock[numerobonhomme]
-    #creation d'une liste vide ou on va rentrer les pas qu'il a fait en etant vivant
-    bonvivant=[]
-    for pas in range(len(x)):
-        if x[pas]!=murdroite and x[pas]!=murgauche:
-            bonvivant.append(x[pas])
-
-        if numerobonhomme%2==0:
-            plt.plot(x[pas],numerobonhomme,'ob')
-        else:
-            plt.plot(x[pas],numerobonhomme,'or')
-        plt.title("déplacement du bonhomme")
-
 
 
 #vision en fonction des pas
@@ -170,32 +157,6 @@ plt.figure(2)
 plt.plot(listpersonneviepas,'^k:')
 plt.show()
 
-
-
-for i in range(nbonhomme) :
-    x = [0]
-    xmaxlife=1
-    p=np.random.choice([1,2,3])
-    wn = [0]
-
-    for z in range(N):
-
-        dx=np.random.normal()
-        xn = x[-1]+ dx
-
-        if p==1 :
-
-            if xmaxlife!=0:
-                xn,xmaxlife, nbonhommeenvie = reflectabsord(N,xn,xmaxlife, nbonhommeenvie)
-                wn.append(1)
-                #les pas en abscisses en ordonnée le nombre de survivant
-                wn.append(nbonhommeenvie)
-            else:
-                xn,xmaxlife=absorbing(xn, murdroite, murgauche,xmaxlife)
-        x.append(xn)
-
-    stock[i,:] = x
-    print(wn)
 
 
 
