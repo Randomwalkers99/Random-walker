@@ -10,7 +10,7 @@ seed(1)
 
 #creation de la liste qui contient les positions du deplacement
 x=[0]
-#nombre de pas fait par la personne 
+#nombre de pas fait par la personne
 N = int(input("number of steps : "))
 nbonhomme = int(input("nombre de personne que vous voulez faire marcher : "))
 murdroite = 5
@@ -26,16 +26,6 @@ stock =np.zeros((nbonhomme,N+1))
 
 stockr =np.zeros((nbonhomme,N+1))
 stocka =np.zeros((nbonhomme,N+1))
-
-
-#np.random.normal prend une valeur dans une fonction normale centree
-#valeur probable pour chaque pas
-for i in range(N):
-    dx=np.random.normal()
-    xn = x[-1]+dx
-    xn= reflect(xn,murdroite,murgauche)
-    x.append(xn)
-    #les murs
 
 
 
@@ -68,22 +58,6 @@ def reflectabsord(N,xn,xmaxlife):
     if 0.5 > p :
         xn,xmaxlife = absorbing(xn, murdroite, murgauche,xmaxlife)
     return(xn,xmaxlife)
-
-
-#vision horizontale
-plt.subplot(211)
-for i in range(N):
-    plt.plot(x[i],3,'ob')
-plt.title("déplacement du bonhomme")
-
-
-#vision en fonction des pas
-plt.subplot(212)
-plt.plot(x,"^y")
-plt.title("distance parcourue a chaque pas")
-plt.xlabel("X")
-plt.ylabel("Y")
-plt.show()
 
 
 
@@ -130,12 +104,16 @@ for i in range(nbonhomme) :
     stockr[i,:]=listreflect
 
 
+
+plt.figure(1)
 for i in range(nbonhomme) :
     plt.plot(stock[i], 'o')
 plt.xlabel('Number of steps')
 plt.ylabel('Position')
 plt.show()
 
+
+plt.figure(2)
 plt.subplot(211)
 
 dureedevietot=0
@@ -154,7 +132,16 @@ for numerobonhomme in range(nbonhomme) :
         plt.title("déplacement du bonhomme")
 
 
-plt.figure(1)
+
+#vision en fonction des pas
+plt.subplot(212)
+plt.plot(x,"^y")
+plt.title("distance parcourue a chaque pas")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.show()
+
+
 #plt.subplot permet de separer la fenetre ou on affiche les graph en plusieurs parties. en l'occurence elle separ en 2 parties
 plt.subplot(212)
 #calcul de la moyenne de la position des bonhommes a chaque pas pour chaque chemin
@@ -248,7 +235,7 @@ plt.plot(r,'b--')
 plt.show()
 
 
-#calcul de variance 
+#calcul de variance
 numbon=0
 X=np.zeros((N+1,nbonhomme))
 listpersonneviepas=[0]*N
@@ -294,8 +281,6 @@ plt.plot(variancepas)
 
 plt.figure(1)
 plt.subplot(211)
-
-dureedevietot=0
 for numerobonhomme in range(nbonhomme) :
     x=stock[numerobonhomme]
     #creation d'une liste vide ou on va rentrer les pas qu'il a fait en etant vivant
@@ -310,17 +295,10 @@ for numerobonhomme in range(nbonhomme) :
             plt.plot(x[pas],numerobonhomme,'or')
         plt.title("déplacement du bonhomme")
 
-
-
-
-moydureedevie=(dureedevietot/N)
-print(moydureedevie)
-
-
 plt.show
 
 #question 1
-
+plt.figure(3)
 plt.subplot(212)
 
 b=stock.mean(axis=0)
